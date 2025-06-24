@@ -75,7 +75,7 @@ export default function Onboard() {
       description: "Your application has been successfully submitted for review.",
     });
     router.push("/");
-  } catch (_) { // Replace error with _
+  } catch  { 
     toast({
       title: "Error",
       description: "Failed to submit application. Please try again.",
@@ -97,8 +97,7 @@ export default function Onboard() {
               </Link>
               <Link href="/login?type=manager" className="text-foreground hover:text-primary">
                 Manager Login
-              </Link>
-              
+              </Link>    
             <ThemeToggle />
             </div>
           </div>

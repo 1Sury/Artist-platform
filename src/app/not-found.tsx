@@ -1,4 +1,4 @@
-// Replace entire file for simplicity
+// Replace entire file
 import Link from "next/link";
 import { Music } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -20,7 +20,7 @@ export default function NotFound() {
         </div>
       </nav>
       <h1 className="text-4xl font-bold text-foreground mb-4">404 - Page Not Found</h1>
-      <p className="text-muted-foreground mb-6">The page you're looking for doesn't exist.</p>
+      <p className="text-muted-foreground mb-6">The page you&apos;re looking for doesn&apos;t exist.</p>
       <Link href="/" className="text-primary hover:underline">
         Return to Home
       </Link>

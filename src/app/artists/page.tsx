@@ -17,7 +17,7 @@ export default function Artists() {
   const [selectedPriceRange, setSelectedPriceRange] = useState("all");
 
   // Mock artist data
-  const artists = [
+  const artists = useMemo(()=> [
     {
       id: 1,
       name: "Sarah Johnson",
@@ -96,7 +96,7 @@ export default function Artists() {
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face",
       bio: "Young and energetic DJ bringing fresh beats to clubs and private events."
     }
-  ];
+  ],[]);
 
   const categories = ["all", "Singer", "Dancer", "DJ", "Speaker"];
   const locations = ["all", "Mumbai", "Delhi", "Bangalore", "Chennai", "Pune"];
