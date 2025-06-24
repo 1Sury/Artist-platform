@@ -61,29 +61,28 @@ export default function Onboard() {
 
   const profileImage = form.watch("profileImage");
 
-  const onSubmit = async (data: ApplicationForm) => {
-    try {
-      await addApplication({
-        ...data,
-        profileImage: data.profileImage ? URL.createObjectURL(data.profileImage) : "/placeholder.svg",
-        city: data.location,
-        fee: "0",
-        languages: [],
-      });
-      toast({
-        title: "Application Submitted",
-        description: "Your application has been successfully submitted for review.",
-      });
-      router.push("/");
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
-
+ const onSubmit = async (data: ApplicationForm) => {
+  try {
+    await addApplication({
+      ...data,
+      profileImage: data.profileImage ? URL.createObjectURL(data.profileImage) : "/placeholder.svg",
+      city: data.location,
+      fee: "0",
+      languages: [],
+    });
+    toast({
+      title: "Application Submitted",
+      description: "Your application has been successfully submitted for review.",
+    });
+    router.push("/");
+  } catch (_) { // Replace error with _
+    toast({
+      title: "Error",
+      description: "Failed to submit application. Please try again.",
+      variant: "destructive",
+    });
+  }
+};
   return (
     <div className="min-h-screen bg-background">
       <nav className="bg-card shadow-sm border-b sticky top-0 z-50">
@@ -92,7 +91,6 @@ export default function Onboard() {
             <Link href="/" className="text-2xl font-bold text-primary">
               Artistly
             </Link>
-            <ThemeToggle />
             <div className="flex space-x-4">
               <Link href="/artists" className="text-foreground hover:text-primary">
                 Artists
@@ -101,6 +99,7 @@ export default function Onboard() {
                 Manager Login
               </Link>
               
+            <ThemeToggle />
             </div>
           </div>
         </div>

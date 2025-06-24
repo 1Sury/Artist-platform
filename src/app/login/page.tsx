@@ -52,12 +52,14 @@ export default function Login() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
+          <div className="flex items-center justify-center space-x-4"></div>
           <Link href="/" className="inline-flex items-center space-x-2 mb-4">
             <ArrowLeft className="h-5 w-5 text-muted-foreground" />
             <Music className="h-8 w-8 text-primary" />
             <span className="text-2xl font-bold text-foreground">Artistly</span>
-            <ThemeToggle />
           </Link>
+          <ThemeToggle />
+          </div>
           <h1 className="text-2xl font-bold text-foreground">Manager Login</h1>
           <p className="text-muted-foreground mt-2">
             Sign in to access your manager dashboard
@@ -121,6 +123,5 @@ export default function Login() {
           </CardContent>
         </Card>
       </div>
-    </div>
   );
 }

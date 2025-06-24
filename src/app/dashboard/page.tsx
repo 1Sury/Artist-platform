@@ -124,7 +124,6 @@ export default function Dashboard() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center space-x-4">
-                <ThemeToggle />
                 <Link href="/" className="flex items-center space-x-2">
                   <ArrowLeft className="h-5 w-5 text-muted-foreground" />
                   <Music className="h-8 w-8 text-primary" />
@@ -137,11 +136,14 @@ export default function Dashboard() {
                 <Link href="/dashboard" className="text-primary font-medium">Dashboard</Link>
               </div>
               <div className="flex items-center space-x-4">
+    <ThemeToggle />
+              <div className="flex items-center space-x-4">
                 <span className="text-sm text-muted-foreground">Welcome, {user?.email}</span>
                 <Button variant="outline" size="sm" onClick={handleLogout}>
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout
                 </Button>
+              </div>
               </div>
             </div>
           </div>

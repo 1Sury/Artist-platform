@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Music, Search, Filter, Star, MapPin, Clock, ArrowLeft } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
-
+import Image from "next/image";
 export default function Artists() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -103,18 +103,18 @@ export default function Artists() {
   const priceRanges = ["all", "10k-20k", "15k-25k", "20k-35k", "25k-40k"];
 
   const filteredArtists = useMemo(() => {
-    return artists.filter((artist) => {
-      const matchesSearch = artist.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          artist.specialties.some(specialty => 
-                            specialty.toLowerCase().includes(searchTerm.toLowerCase())
-                          );
-      const matchesCategory = selectedCategory === "all" || artist.category === selectedCategory;
-      const matchesLocation = selectedLocation === "all" || artist.location === selectedLocation;
-      const matchesPriceRange = selectedPriceRange === "all" || artist.priceRange === selectedPriceRange;
-      
-      return matchesSearch && matchesCategory && matchesLocation && matchesPriceRange;
-    });
-  }, [searchTerm, selectedCategory, selectedLocation, selectedPriceRange]);
+  return artists.filter((artist) => {
+    const matchesSearch = artist.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         artist.specialties.some(specialty => 
+                           specialty.toLowerCase().includes(searchTerm.toLowerCase())
+                         );
+    const matchesCategory = selectedCategory === "all" || artist.category === selectedCategory;
+    const matchesLocation = selectedLocation === "all" || artist.location === selectedLocation;
+    const matchesPriceRange = selectedPriceRange === "all" || artist.priceRange === selectedPriceRange;
+    
+    return matchesSearch && matchesCategory && matchesLocation && matchesPriceRange;
+  });
+}, [searchTerm, selectedCategory, selectedLocation, selectedPriceRange, artists]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -123,7 +123,6 @@ export default function Artists() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <ThemeToggle />
               <Link href="/" className="flex items-center space-x-2">
                 <ArrowLeft className="h-5 w-5 text-muted-foreground" />
                 <Music className="h-8 w-8 text-primary" />
@@ -136,6 +135,9 @@ export default function Artists() {
               <Link href="/onboard" className="text-muted-foreground hover:text-primary transition-colors">Join as Artist</Link>
               <Link href="/dashboard" className="text-muted-foreground hover:text-primary transition-colors">Dashboard</Link>
             </div>
+            <div className="flex items-center space-x-4">
+    <ThemeToggle /> 
+  </div>
           </div>
         </div>
       </nav>
@@ -220,9 +222,11 @@ export default function Artists() {
             <Card key={artist.id} className="group hover:shadow-xl transition-all duration-300">
               <CardContent className="p-0">
                 <div className="relative overflow-hidden">
-                  <img
+                 <Image
   src={artist.image || "/placeholder.svg"}
   alt={artist.name}
+  width={200} 
+  height={192} 
   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
 />
                   <div className="absolute top-4 right-4">
