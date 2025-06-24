@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Music, Mic2, Users, Headphones, Star, MapPin, Clock } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
-
+import Image from "next/image";
 export default function Index() {
   const categories = [
     {
@@ -181,11 +181,14 @@ export default function Index() {
               <Card key={artist.id} className="group hover:shadow-xl transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-4 mb-4">
-                    <img 
-                      src={artist.image} 
-                      alt={artist.name}
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
+                    
+<Image
+  src={artist.image}
+  alt={artist.name}
+  width={64}
+  height={64}
+  className="w-16 h-16 rounded-full object-cover"
+/>
                     <div>
                       <h3 className="font-bold text-lg text-foreground">{artist.name}</h3>
                       <p className="text-primary font-medium">{artist.category}</p>
