@@ -1,7 +1,8 @@
 "use client";
+export const dynamic = "force-dynamic";
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,10 +18,19 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [loginType, setLoginType] = useState("manager");
+
   const { login } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const loginType = searchParams.get("type") || "manager";
+
+  // Read query param client-side only
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get("type");
+      if (type) setLoginType(type);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,7 +119,9 @@ export default function Login() {
 
             {/* Demo Credentials */}
             <div className="mt-6 space-y-3">
-              <div className="text-sm text-muted-foreground text-center">Demo Credentials:</div>
+              <div className="text-sm text-muted-foreground text-center">
+                Demo Credentials:
+              </div>
               <div className="grid grid-cols-1 gap-2">
                 <Button
                   variant="outline"
