@@ -12,7 +12,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useApplications } from "@/contexts/ApplicationContext";
 import { toast } from "@/hooks/use-toast";
 import ProtectedRoute from "@/components/ProtectedRoute";
-
+import ThemeToggle from "@/components/ThemeToggle";
 export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState("applications");
   const { user, logout } = useAuth();
@@ -124,6 +124,7 @@ export default function Dashboard() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center space-x-4">
+                <ThemeToggle />
                 <Link href="/" className="flex items-center space-x-2">
                   <ArrowLeft className="h-5 w-5 text-muted-foreground" />
                   <Music className="h-8 w-8 text-primary" />

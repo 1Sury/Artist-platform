@@ -10,7 +10,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import Link from "next/link";
 import { Music, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-
+import ThemeToggle from "@/components/ThemeToggle";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +26,6 @@ export default function Login() {
     setError("");
     setIsLoading(true);
 
-    // Only allow manager login with specific credentials
     if (email !== "manager@artistly.com" || password !== "manager123") {
       setError("Invalid credentials. Please use manager demo credentials.");
       setIsLoading(false);
@@ -57,6 +56,7 @@ export default function Login() {
             <ArrowLeft className="h-5 w-5 text-muted-foreground" />
             <Music className="h-8 w-8 text-primary" />
             <span className="text-2xl font-bold text-foreground">Artistly</span>
+            <ThemeToggle />
           </Link>
           <h1 className="text-2xl font-bold text-foreground">Manager Login</h1>
           <p className="text-muted-foreground mt-2">

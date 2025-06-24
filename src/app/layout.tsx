@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "../components/ui/sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ApplicationProvider } from "@/contexts/ApplicationContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,14 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <AuthProvider>
-          <ApplicationProvider>
-            {children}
-            <Toaster />
-          </ApplicationProvider>
-        </AuthProvider>
+    <html lang="en" className={inter.className}>
+      <body>
+        <ThemeProvider>
+          <AuthProvider>
+            <ApplicationProvider>
+              {children}
+              <Toaster />
+            </ApplicationProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

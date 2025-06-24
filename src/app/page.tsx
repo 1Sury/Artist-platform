@@ -1,9 +1,11 @@
+
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Music, Mic2, Users, Headphones, Star, MapPin, Clock } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Index() {
   const categories = [
@@ -91,6 +93,7 @@ export default function Index() {
               <Link href="/login?type=manager" className="text-muted-foreground hover:text-primary transition-colors">Manager Login</Link>
             </div>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <Button variant="outline" asChild>
                 <Link href="/onboard">Join as Artist</Link>
               </Button>

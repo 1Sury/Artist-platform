@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Music, Search, Filter, Star, MapPin, Clock, ArrowLeft } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Artists() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -122,6 +123,7 @@ export default function Artists() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <Link href="/" className="flex items-center space-x-2">
                 <ArrowLeft className="h-5 w-5 text-muted-foreground" />
                 <Music className="h-8 w-8 text-primary" />

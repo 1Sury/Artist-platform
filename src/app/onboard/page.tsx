@@ -20,6 +20,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Upload } from "lucide-react";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const applicationSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -91,6 +92,7 @@ export default function Onboard() {
             <Link href="/" className="text-2xl font-bold text-primary">
               Artistly
             </Link>
+            <ThemeToggle />
             <div className="flex space-x-4">
               <Link href="/artists" className="text-foreground hover:text-primary">
                 Artists
@@ -98,6 +100,7 @@ export default function Onboard() {
               <Link href="/login?type=manager" className="text-foreground hover:text-primary">
                 Manager Login
               </Link>
+              
             </div>
           </div>
         </div>
