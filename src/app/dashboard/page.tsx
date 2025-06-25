@@ -16,7 +16,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState("applications");
-  const { user, logout } = useAuth();
+const { logout } = useAuth();
   const { applications, updateApplicationStatus } = useApplications();
   const router = useRouter();
 
