@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useApplications } from "@/contexts/ApplicationContext";
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Upload } from "lucide-react";
+import { Upload, Menu, X } from "lucide-react";
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -45,6 +46,8 @@ export default function Onboard() {
   const router = useRouter();
   const { toast } = useToast();
   const { addApplication } = useApplications();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   const form = useForm<ApplicationForm>({
     resolver: zodResolver(applicationSchema),
     defaultValues: {
@@ -61,28 +64,33 @@ export default function Onboard() {
 
   const profileImage = form.watch("profileImage");
 
- const onSubmit = async (data: ApplicationForm) => {
-  try {
-    await addApplication({
-      ...data,
-      profileImage: data.profileImage ? URL.createObjectURL(data.profileImage) : "/placeholder.svg",
-      city: data.location,
-      fee: "0",
-      languages: [],
-    });
-    toast({
-      title: "Application Submitted",
-      description: "Your application has been successfully submitted for review.",
-    });
-    router.push("/");
-  } catch  { 
-    toast({
-      title: "Error",
-      description: "Failed to submit application. Please try again.",
-      variant: "destructive",
-    });
-  }
-};
+  const onSubmit = async (data: ApplicationForm) => {
+    try {
+      await addApplication({
+        ...data,
+        profileImage: data.profileImage ? URL.createObjectURL(data.profileImage) : "/placeholder.svg",
+        city: data.location,
+        fee: "0",
+        languages: [],
+      });
+      toast({
+        title: "Application Submitted",
+        description: "Your application has been successfully submitted for review.",
+      });
+      router.push("/");
+    } catch  { 
+      toast({
+        title: "Error",
+        description: "Failed to submit application. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <nav className="bg-card shadow-sm border-b sticky top-0 z-50">
@@ -91,16 +99,56 @@ export default function Onboard() {
             <Link href="/" className="text-2xl font-bold text-primary">
               Artistly
             </Link>
-            <div className="flex space-x-4">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex space-x-4 items-center">
               <Link href="/artists" className="text-foreground hover:text-primary">
                 Artists
               </Link>
               <Link href="/login?type=manager" className="text-foreground hover:text-primary">
                 Manager Login
               </Link>    
-            <ThemeToggle />
+              <ThemeToggle />
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center space-x-2">
+              <ThemeToggle />
+              <button
+                onClick={toggleMobileMenu}
+                className="text-foreground hover:text-primary p-2"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
             </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-border">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <Link 
+                  href="/artists" 
+                  className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-md"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Artists
+                </Link>
+                <Link 
+                  href="/login?type=manager" 
+                  className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-md"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Manager Login
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 

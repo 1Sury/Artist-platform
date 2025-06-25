@@ -1,14 +1,21 @@
-
 "use client";
 export const dynamic = 'force-dynamic';
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Music, Mic2, Users, Headphones, Star, MapPin, Clock } from "lucide-react";
+import { Music, Mic2, Users, Headphones, Star, MapPin, Clock, Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import Image from "next/image";
+import { useState } from "react";
+
 export default function Index() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const categories = [
     {
       id: 1,
@@ -87,13 +94,17 @@ export default function Index() {
               <Music className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-foreground">Artistly</span>
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link>
               <Link href="/artists" className="text-muted-foreground hover:text-primary transition-colors">Browse Artists</Link>
               <Link href="/onboard" className="text-muted-foreground hover:text-primary transition-colors">Join as Artist</Link>
               <Link href="/login?type=manager" className="text-muted-foreground hover:text-primary transition-colors">Manager Login</Link>
             </div>
-            <div className="flex items-center space-x-4">
+            
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
               <ThemeToggle />
               <Button variant="outline" asChild>
                 <Link href="/onboard">Join as Artist</Link>
@@ -102,7 +113,59 @@ export default function Index() {
                 <Link href="/artists">Browse Artists</Link>
               </Button>
             </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center space-x-2">
+              <ThemeToggle />
+              <button
+                onClick={toggleMenu}
+                className="p-2 rounded-md text-muted-foreground hover:text-primary hover:bg-accent transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-card border-t">
+                <Link 
+                  href="/" 
+                  className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link 
+                  href="/artists" 
+                  className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Browse Artists
+                </Link>
+                <Link 
+                  href="/onboard" 
+                  className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Join as Artist
+                </Link>
+                <Link 
+                  href="/login?type=manager" 
+                  className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Manager Login
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 

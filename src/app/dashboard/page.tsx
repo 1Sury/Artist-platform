@@ -13,6 +13,7 @@ import { useApplications } from "@/contexts/ApplicationContext";
 import { toast } from "@/hooks/use-toast";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ThemeToggle from "@/components/ThemeToggle";
+
 export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState("applications");
   const { user, logout } = useAuth();
@@ -136,14 +137,11 @@ export default function Dashboard() {
                 <Link href="/dashboard" className="text-primary font-medium">Dashboard</Link>
               </div>
               <div className="flex items-center space-x-4">
-    <ThemeToggle />
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-muted-foreground">Welcome, {user?.email}</span>
+                <ThemeToggle />
                 <Button variant="outline" size="sm" onClick={handleLogout}>
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout
                 </Button>
-              </div>
               </div>
             </div>
           </div>
